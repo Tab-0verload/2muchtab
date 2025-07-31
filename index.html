@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>TMT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav id="category-nav">
+      <button data-category="math" class="active">Математика</button>
+      <button data-category="games">Игры</button>
+      <button data-category="releases">Скоро</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="categories">
+      <!-- Математика -->
+      <div class="category" data-category="math">
+        <div class="game-list">
+          <button class="launch-game" data-game="math/multiplier">Множитель</button>
+          <button class="launch-game" data-game="math/percent">Проценты</button>
+          <button class="launch-game" data-game="math/datetime">Время и путь</button>
+        </div>
+      </div>
+
+      <!-- Игры -->
+      <div class="category" data-category="games">
+        <div class="game-list">
+          <button class="launch-game" data-game="game/fifteen">15</button>
+          <button class="launch-game" data-game="game/2048v1">2048v1</button>
+          <button class="launch-game" data-game="game/2048v2">2048v2</button>
+          <button class="launch-game" data-game="game/match3">3 в ряд</button>
+          <button class="launch-game" data-game="clicker">Кликер</button>
+        </div>
+      </div>
+      
+      <div class="category" data-category="releases">
+        <div class="game-list">
+          <button class="launch-game" data-game="releases/releases">Игры/Фильмы</button>
+        </div>
+        
+      </div>
+    </section>
+
+    <section id="game-container">
+      <div id="game-content"></div>
+    </section>
+
+    <div id="status-bar"></div>
+  </main>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
