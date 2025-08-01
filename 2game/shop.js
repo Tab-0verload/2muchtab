@@ -21,7 +21,7 @@ export function render(container) {
   const info = document.createElement('div');
 
   // Клик улучшение
-  const clickCost = clickLevel * 500;
+  const clickCost = clickLevel * 50000;
   const clickBtn = document.createElement('button');
   clickBtn.classList.add('mclickgs');
   clickBtn.innerHTML = `Клик <br> (x${clickLevel}, ${clickCost})`;
@@ -36,7 +36,7 @@ export function render(container) {
   };
 
   // Множитель банка
-  const bankCost = bankMultiplier * 1000;
+  const bankCost = bankMultiplier * 5000;
   const bankBtn = document.createElement('button');
   bankBtn.classList.add('mclickgs');
   bankBtn.innerHTML = `% банка <br> (x${bankMultiplier}, ${bankCost})`;
