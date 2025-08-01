@@ -111,8 +111,8 @@ export function startGame(container) {
     const matches = checkMatches();
     if (matches.length === 0) return;
     matches.forEach(([x, y]) => (board[y][x] = null));
-    score += matches.length;
-    localStorage.setItem('blm3', (Number(localStorage.getItem('blm3')) || 0) + matches.length);
+    score += matches.length *15;
+    localStorage.setItem('blm3', (Number(localStorage.getItem('blm3')) || 0) + matches.length *15);
     scoreDiv.textContent = `Очки: ${score}`;
     collapseBoard();
     setTimeout(() => {
