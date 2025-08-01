@@ -1,7 +1,7 @@
-import * as game1 from '2game/game1.js';
-import * as game2 from '2game/game2.js';
-import * as shop from '2game/shop.js';
-import * as bank from '2game/bank.js';
+import * as game1 from '/2game/game1.js';
+import * as game2 from '/2game/game2.js';
+import * as shop from '/2game/shop.js';
+import * as bank from '/2game/bank.js';
 
 
 let balance = Number(localStorage.getItem('balance')) || 0;
