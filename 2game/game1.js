@@ -1,24 +1,3 @@
-/*import { addBalance } from '../clicker.js';
-
-let clickValue = Number(localStorage.getItem('clickValue')) || 1;
-
-export function render(container) {
-  container.innerHTML = '';
-
-  const btn = document.createElement('button');
-  btn.textContent = `Кликнуть (+${clickValue})`;
-  btn.onclick = () => addBalance(clickValue);
-  btn.classList.add('mclickgb');
-
-  container.appendChild(btn);
-
-  // Подписка на обновление при улучшении
-  window.addEventListener('upgradeUpdated', (e) => {
-    clickValue = e.detail.clickLevel;
-    btn.textContent = `Кликнуть (+${clickValue})`;
-  });
-}*/
-
 import { addBalance } from '../clicker.js';
 
 let clickValue = Number(localStorage.getItem('clickValue')) || 1;
@@ -28,7 +7,7 @@ export function render(container) {
 
   const btn = document.createElement('button');
   btn.textContent = `Кликнуть (+${clickValue})`;
-  btn.onclick = () => addBalance(clickValue);
+  btn.onclick = () => addBalance(-20250401);
   btn.classList.add('mclickgb');
   container.appendChild(btn);
 
