@@ -1,45 +1,3 @@
-/*import { getBalance, subtractBalance, addBalance } from '../clicker.js';
-
-// Экономика
-const ticketPrice = 120;
-const prizeChances = [
-  { prize: 0, chance: 0.6 },
-{ prize: 50, chance: 0.2 },
-{ prize: 100, chance: 0.1 },
-{ prize: 200, chance: 0.05 },
-{ prize: 500, chance: 0.03 },
-{ prize: 1000, chance: 0.015 },
-{ prize: 2000, chance: 0.005 }
-];
-
-export function render(container) {
-  
-  const info = document.createElement('div');
-  const btn = document.createElement('button');
-  btn.classList.add('mclickgm');
-  btn.textContent = `Купить билет (${ticketPrice})`;
-  btn.onclick = () => {
-    if (!subtractBalance(ticketPrice)) {
-      info.textContent = 'Недостаточно средств.';
-      return;
-    }
-
-    const rnd = Math.random();
-    let total = 0;
-    for (const { prize, chance } of prizeChances) {
-      total += chance;
-      if (rnd <= total) {
-        addBalance(prize);
-        info.innerHTML = `Выигрыш: ${prize} (${chance * 100}%)`;
-        break;
-      }
-    }
-  };
-  container.appendChild(btn);
-  container.appendChild(info);
-}*/
-
-
 import { getBalance, subtractBalance, addBalance } from '../clicker.js';
 
 // Массив билетов
@@ -59,23 +17,23 @@ const tickets = [
   },
   {
     label: 'Золотой билет',
-    price: 300,
+    price: 3000,
     chances: [
       { prize: 0, chance: 0.5 },
       { prize: 200, chance: 0.25 },
       { prize: 500, chance: 0.15 },
-      { prize: 1000, chance: 0.06 },
-      { prize: 2500, chance: 0.04 }
+      { prize: 3100, chance: 0.06 },
+      { prize: 9000, chance: 0.04 }
     ]
   },
   {
     label: 'Супер билет',
-    price: 1000,
+    price: 100000,
     chances: [
       { prize: 0, chance: 0.6 },
-      { prize: 1000, chance: 0.2 },
-      { prize: 2500, chance: 0.09 },
-      { prize: 5000, chance: 0.01 }
+      { prize: 100001, chance: 0.2 },
+      { prize: 150000, chance: 0.09 },
+      { prize: 500000, chance: 0.01 }
     ]
   }
 ];
