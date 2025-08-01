@@ -45,13 +45,21 @@ export function render(container) {
         return;
       }
 
-      timers.push({
-        id: Date.now() + Math.random(),
-        start: Date.now(),
-        amount: dep.amount,
-        rate: dep.rate,
-        claimed: false,
-      });
+      const lastTimer = timers.length > 0
+  ? timers[timers.length - 1]
+  : null;
+
+const newStart = lastTimer
+  ? lastTimer.start + duration
+  : Date.now();
+
+timers.push({
+  id: Date.now() + Math.random(),
+  start: newStart,
+  amount: dep.amount,
+  rate: dep.rate,
+  claimed: false,
+});
 
       saveTimers(timers);
       render(container); // Перерисуем всё
