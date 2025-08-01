@@ -1,4 +1,3 @@
-import { addBalance } from '../clicker.js';
 export function startGame(container) {
   container.innerHTML = `
     <div id="score">Счёт: 0</div>
