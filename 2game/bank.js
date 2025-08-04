@@ -86,7 +86,7 @@ timers.push({
 
       if (timePassed >= duration && !t.claimed) {
         const reward = Math.floor(t.amount * (1 + t.rate * bankMultiplier));
-        li.textContent = `Готово: вклад ${formatNumber(t.amount)}, прибыль ${formatNumber(reward)}`;
+        li.textContent = `Готово: вклад ${formatNumber(t.amount)} | прибыль ${formatNumber(reward)}`;
         const claimBtn = document.createElement('button');
         claimBtn.classList.add('mclickgcl');
         claimBtn.textContent = 'Забрать';
@@ -99,7 +99,7 @@ timers.push({
         li.appendChild(claimBtn);
       } else if (!t.claimed) {
         const timeLeft = Math.ceil((duration - timePassed) / 1000);
-        li.textContent = `Вклад ${formatNumber(t.amount)}, осталось: ${timeLeft} сек.`;
+        li.textContent = `Вклад ${formatNumber(t.amount)} | осталось: ${timeLeft} сек.`;
       }
 
       if (!t.claimed) list.appendChild(li);
