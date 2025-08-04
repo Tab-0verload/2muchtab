@@ -1,4 +1,5 @@
 import { getBalance, subtractBalance, addBalance } from '../clicker.js';
+import { formatNumber } from '../clicker.js';
 
 // Массив билетов
 const tickets = [
@@ -48,8 +49,15 @@ export function render(container) {
   tickets.forEach(ticket => {
     const btn = document.createElement('button');
     btn.classList.add('mclickgm');
-    btn.textContent = `${ticket.label} (${ticket.price})`;
+    btn.textContent = `${formatNumber(ticket.label)} (${formatNumber(ticket.price)})`;
 
+btn.addEventListener('click', () => {
+  btn.style.backgroundColor = '#1d2327';
+  setTimeout(() => {
+    btn.style.backgroundColor = '#495057';
+  }, 80);
+});
+    
     btn.onclick = () => {
       if (!subtractBalance(ticket.price)) {
         info.textContent = 'Недостаточно средств.';
@@ -62,7 +70,7 @@ export function render(container) {
         total += chance;
         if (rnd <= total) {
           addBalance(prize);
-          info.innerHTML = `Выигрыш: ${prize} (${chance * 100}%)`;
+          info.innerHTML = `Выигрыш: ${formatNumber(prize)} (${chance * 100}%)`;
           return;
         }
       }
