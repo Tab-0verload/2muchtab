@@ -1,4 +1,5 @@
 import { getBalance, subtractBalance } from '../clicker.js';
+import { formatNumber } from '../clicker.js';
 
 // Экономика
 let clickLevel = Number(localStorage.getItem('clickLevel')) || 1;
@@ -24,7 +25,7 @@ export function render(container) {
   const clickCost = clickLevel * 50000;
   const clickBtn = document.createElement('button');
   clickBtn.classList.add('mclickgs');
-  clickBtn.innerHTML = `Клик <br> (x${clickLevel}, ${clickCost})`;
+  clickBtn.innerHTML = `Клик <br> (x${clickLevel}, ${formatNumber(clickCost)})`;
   clickBtn.onclick = () => {
     if (subtractBalance(clickCost)) {
       clickLevel++;
@@ -39,7 +40,7 @@ export function render(container) {
   const bankCost = bankMultiplier * 5000;
   const bankBtn = document.createElement('button');
   bankBtn.classList.add('mclickgs');
-  bankBtn.innerHTML = `% банка <br> (x${bankMultiplier}, ${bankCost})`;
+  bankBtn.innerHTML = `% банка <br> (x${bankMultiplier}, ${formatNumber(bankCost)})`;
   bankBtn.onclick = () => {
     if (subtractBalance(bankCost)) {
       bankMultiplier++;
@@ -54,7 +55,7 @@ export function render(container) {
   const depositCost = depositLevel * 500;
   const depositBtn = document.createElement('button');
   depositBtn.classList.add('mclickgs');
-  depositBtn.innerHTML = `Вклады <br> (уровень ${depositLevel}, ${depositCost})`;
+  depositBtn.innerHTML = `Вклады <br> (уровень ${depositLevel}, ${formatNumber(depositCost)})`;
   depositBtn.onclick = () => {
     if (subtractBalance(depositCost)) {
       depositLevel++;
