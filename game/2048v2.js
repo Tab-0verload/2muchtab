@@ -1,3 +1,5 @@
+import { formatNumber } from '../clicker.js';
+
 export function startGame(container) {
   container.innerHTML = `
     <div id="score">Счёт: 0</div>
@@ -46,7 +48,7 @@ function updateScore() {
     localStorage.setItem('bl2048', (Number(localStorage.getItem('bl2048')) || 0) + delta);
     maxTile = currentMax;
   }
-  scoreElem.textContent = `Счёт: ${currentMax}`;
+  scoreElem.textContent = `Счёт: ${formatNumber(currentMax)}`;
 }
 
   gameFieldElem.addEventListener("click", (e) => {
