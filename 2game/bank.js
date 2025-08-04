@@ -1,4 +1,5 @@
 import { getBalance, subtractBalance, addBalance } from '../clicker.js';
+import { formatNumber } from '../clicker.js';
 
 const duration = 1 * 60 *1000; // 2 минуты
 
@@ -37,7 +38,7 @@ export function render(container) {
 
   depositOptions.forEach((dep) => {
     const btn = document.createElement('button');
-    btn.textContent = `Вложить ${dep.amount}`;
+    btn.textContent = `Вложить ${formatNumber(dep.amount)}`;
     btn.classList.add('mclickgs');
     btn.onclick = () => {
       if (!subtractBalance(dep.amount)) {
@@ -85,7 +86,7 @@ timers.push({
 
       if (timePassed >= duration && !t.claimed) {
         const reward = Math.floor(t.amount * (1 + t.rate * bankMultiplier));
-        li.textContent = `Готово: вклад ${t.amount}, прибыль ${reward}`;
+        li.textContent = `Готово: вклад ${formatNumber(t.amount)}, прибыль ${formatNumber(reward)}`;
         const claimBtn = document.createElement('button');
         claimBtn.classList.add('mclickgcl');
         claimBtn.textContent = 'Забрать';
@@ -98,7 +99,7 @@ timers.push({
         li.appendChild(claimBtn);
       } else if (!t.claimed) {
         const timeLeft = Math.ceil((duration - timePassed) / 1000);
-        li.textContent = `Вклад ${t.amount}, осталось: ${timeLeft} сек.`;
+        li.textContent = `Вклад ${formatNumber(t.amount)}, осталось: ${timeLeft} сек.`;
       }
 
       if (!t.claimed) list.appendChild(li);
