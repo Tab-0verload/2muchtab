@@ -1,3 +1,5 @@
+import { formatNumber } from '../clicker.js';
+
 export function startGame(container) {
   const size = 6;
   const types = ["₿", "$", "€", "¥", "£", "₹"];
@@ -113,7 +115,7 @@ export function startGame(container) {
     matches.forEach(([x, y]) => (board[y][x] = null));
     score += matches.length *15;
     localStorage.setItem('blm3', (Number(localStorage.getItem('blm3')) || 0) + matches.length *15);
-    scoreDiv.textContent = `Очки: ${score}`;
+    scoreDiv.textContent = `Очки: ${formatNumber(score)}`;
     collapseBoard();
     setTimeout(() => {
       refillBoard();
