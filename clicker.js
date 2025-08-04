@@ -8,7 +8,7 @@ let balance = Number(localStorage.getItem('balance')) || 0;
 
 
 function updateBalance() {
-  document.getElementById('balance').textContent = `Баланс: ${Math.floor(balance)}`;
+  document.getElementById('balance').textContent = `Баланс: ${formatNumber(Math.floor(balance))}`;
   localStorage.setItem('balance', balance);
 }
 
@@ -29,6 +29,10 @@ export function subtractBalance(amount) {
     return true;
   }
   return false;
+}
+
+export function formatNumber(num) {
+  return num.toLocaleString('en-US');
 }
 
 const views = {
@@ -55,7 +59,7 @@ export function startGame(container) {
   function updateBalance() {
   const balanceEl = document.getElementById('balance');
   if (balanceEl) {
-    balanceEl.textContent = `Баланс: ${Math.floor(balance)}`;
+    balanceEl.textContent = `Баланс: ${formatNumber(Math.floor(balance))}`;
   }
   localStorage.setItem('balance', balance);
 }
