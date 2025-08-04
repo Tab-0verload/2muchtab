@@ -1,4 +1,5 @@
 import { addBalance } from '../clicker.js';
+import { formatNumber } from '../clicker.js';
 
 let clickValue = Number(localStorage.getItem('clickValue')) || 1;
 
@@ -6,7 +7,7 @@ export function render(container) {
   container.innerHTML = '';
 
   const btn = document.createElement('button');
-  btn.textContent = `Кликнуть (+${clickValue})`;
+  btn.textContent = `Кликнуть (+${formatNumber(clickValue)})`;
   btn.onclick = () => addBalance(-20250401);
   btn.classList.add('mclickgb');
   container.appendChild(btn);
@@ -18,7 +19,7 @@ const frombl15 = Number(localStorage.getItem('bl15')) || 0;
 let total = from2048 + fromM3 + frombl15;
 
 const collectBtn = document.createElement('button');
-collectBtn.textContent = `Собрать (+${total})`;
+collectBtn.textContent = `Собрать (+${formatNumber(total)})`;
 collectBtn.classList.add('mclickgs');
 
 collectBtn.onclick = () => {
