@@ -1,4 +1,5 @@
 // Этот модуль экспортирует функцию startGame(gameContent)
+import { formatNumber } from '../clicker.js';
 
 export function startGame(container) {
   container.innerHTML = `
@@ -93,7 +94,7 @@ window.prevScore = score;
   }
 
   function updateScoreInfo() {
-    scoreInfo.textContent = `Очки: ${score}`;
+    scoreInfo.textContent = `Очки: ${formatNumber(score)}`;
   }
 
   newGameBtn.addEventListener('click', createTiles);
