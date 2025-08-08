@@ -309,8 +309,8 @@ nav button:hover {
 
 #game-field {
   display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(4, 100px);
   gap: 10px;
   margin-bottom: 20px;
   justify-content: center;
@@ -343,8 +343,13 @@ nav button:hover {
 .cell[data-value="128"] { background-color: #664f3c; }
 .cell[data-value="256"] { background-color: #6a3e34; }
 .cell[data-value="512"] { background-color: #5a2e3c; }
-.cell[data-value="1024"] { background-color: #442c3c; color: white; }
-.cell[data-value="2048"] { background-color: #2e2a24; color: white; }
+.cell[data-value="1024"] { background-color: #442c3c; }
+.cell[data-value="2048"] { background-color: #2e2a24; }
+.cell[data-value="4096"] { background-color: #3a2d1f; }
+.cell[data-value="8192"] { background-color: #4d351b; }
+.cell[data-value="16384"] { background-color: #5e3f1b; }
+.cell[data-value="32768"] { background-color: #704a1b; }
+.cell[data-value="65536"] { background-color: #82551b; }
 
 #score {
   margin-bottom: 20px;
