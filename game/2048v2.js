@@ -7,7 +7,7 @@ export function startGame(container) {
     <button id="restart-btn">Заново</button><br />
   `;
 
-  const fieldSize = 3;
+  const fieldSize = 4;
   let gameField = Array(fieldSize * fieldSize).fill(null);
   let selectedCellIndex = null;
   let moveCount = 0;
