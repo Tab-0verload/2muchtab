@@ -12,6 +12,7 @@ export function startGame(container) {
     <div id="board3"></div>
     <button id="resetBtn3">Перезапустить поле</button>
   `;
+  let bankMultiplier = Number(localStorage.getItem('bankMultiplier')) || 1;
 
   const boardDiv = container.querySelector("#board3");
   const scoreDiv = container.querySelector("#score3");
@@ -113,8 +114,8 @@ export function startGame(container) {
     const matches = checkMatches();
     if (matches.length === 0) return;
     matches.forEach(([x, y]) => (board[y][x] = null));
-    score += matches.length *15;
-    localStorage.setItem('blm3', (Number(localStorage.getItem('blm3')) || 0) + matches.length *15);
+    score += matches.length *bankMultiplier;
+    localStorage.setItem('blm3', (Number(localStorage.getItem('blm3')) || 0) + matches.length *bankMultiplier);
     scoreDiv.textContent = `Очки: ${formatNumber(score)}`;
     collapseBoard();
     setTimeout(() => {
