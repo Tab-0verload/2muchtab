@@ -46,13 +46,18 @@ export function render(container) {
         return;
       }
 
-      const lastTimer = timers.length > 0
+      const now = Date.now();
+const lastTimer = timers.length > 0
   ? timers[timers.length - 1]
   : null;
 
-const newStart = lastTimer
-  ? lastTimer.start + duration
-  : Date.now();
+const lastEnd = lastTimer 
+? lastTimer.start + duration 
+: 0;
+
+const newStart = lastEnd > now
+  ? lastEnd
+  : now;
 
 timers.push({
   id: Date.now() + Math.random(),
