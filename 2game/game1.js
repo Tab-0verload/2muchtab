@@ -33,6 +33,7 @@ collectBtn.onclick = () => {
   localStorage.setItem('bl15', 0);
 
   collectBtn.textContent = 'Собрано';
+  collectBtn.disabled = true;
 };
 
 container.appendChild(collectBtn);
