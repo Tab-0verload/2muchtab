@@ -9,6 +9,26 @@ export function startGame(container) {
     <button class="button" id="new-game-btn">Новая игра</button>
   `;
 
+const strategyBtn = document.createElement('button');
+strategyBtn.textContent = 'Улучшить';
+strategyBtn.className = 'button';
+container.appendChild(strategyBtn);
+
+let currentPathLength = 1;
+
+strategyBtn.addEventListener('click', () => {
+    currentPathLength++;
+
+    if (currentPathLength >= 8) {
+        strategyBtn.textContent = 'Макс. уровень';
+        strategyBtn.disabled = true;
+    } else {
+        strategyBtn.textContent = `Улучшено x${currentPathLength}`;
+    }
+});
+
+
+  
   const board = container.querySelector('#board');
   const newGameBtn = container.querySelector('#new-game-btn');
   const moveInfo = container.querySelector('#move-info');
@@ -98,5 +118,33 @@ window.prevScore = score;
   }
 
   newGameBtn.addEventListener('click', createTiles);
+
+
+const pathSteps = [12,8,4,0,1,5,9,13];
+
+function autoPlay() {
+  const path = pathSteps.slice(0, currentPathLength);
+  let moved = false;
+
+  for (const target of path) {
+    const neighbors = getNeighbors(target);
+
+    for (const neighbor of neighbors) {
+      if (tiles[neighbor] === tiles[target]) {
+        selectTile(neighbor);
+        moved = true;
+        break;
+      }
+    }
+
+    if (moved) break;
+  }
+
+  setTimeout(autoPlay, 0);
+}
+
+
+  
   createTiles();
+  autoPlay();
 }
