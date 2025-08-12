@@ -1,7 +1,7 @@
 import { getBalance, subtractBalance, addBalance } from '../clicker.js';
 import { formatNumber } from '../clicker.js';
 
-const duration = 1 * 60 *1000; // 2 минуты
+const duration = 30 * 60 *1000; // 2 минуты
 
 let bankMultiplier = Number(localStorage.getItem('bankMultiplier')) || 1;
 let depositLevel = Number(localStorage.getItem('depositLevel')) || 1;
