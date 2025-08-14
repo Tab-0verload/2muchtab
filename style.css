@@ -24,12 +24,12 @@ body {
 
 header {
   background: #1f1f1f;
-  padding: 3rem;
+  padding: 0.1rem;
   text-align: center;
 }
 
 nav button {
-  margin: 0 0.5rem;
+  margin: 0.5rem 0.5rem;
   padding: 0.5rem 1rem;
   background: var(--button-bg);
   color: var(--text-color);
@@ -252,28 +252,26 @@ nav button:hover {
 
 .board {
   display: grid;
-  grid-template-columns: repeat(4, 80px);
+  grid-template-columns: repeat(4, 90px);
   grid-gap: 5px;
   margin-bottom: 10px;
   justify-content: center;
 }
 
 .tile {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   background: #4682B4;
   color: white;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: all 0.2s ease;
-}
+  border-radius: 10px;
 
-.highlight {
-  border: 2px solid #FFD700;
 }
 
 .tile-2 { background-color: #005c12; }
@@ -334,22 +332,22 @@ nav button:hover {
   outline: 3px solid darkgreen;
 }
 
-.cell[data-value="2"] { background-color: #1b263b; }
-.cell[data-value="4"] { background-color: #27394d; }
-.cell[data-value="8"] { background-color: #34495e; }
-.cell[data-value="16"] { background-color: #3c4f54; }
-.cell[data-value="32"] { background-color: #4b5e4b; }
-.cell[data-value="64"] { background-color: #5c5a3c; }
-.cell[data-value="128"] { background-color: #664f3c; }
-.cell[data-value="256"] { background-color: #6a3e34; }
-.cell[data-value="512"] { background-color: #5a2e3c; }
-.cell[data-value="1024"] { background-color: #442c3c; }
-.cell[data-value="2048"] { background-color: #2e2a24; }
-.cell[data-value="4096"] { background-color: #3a2d1f; }
-.cell[data-value="8192"] { background-color: #4d351b; }
-.cell[data-value="16384"] { background-color: #5e3f1b; }
-.cell[data-value="32768"] { background-color: #704a1b; }
-.cell[data-value="65536"] { background-color: #82551b; }
+.cell[data-value="2"] { background-color: #27374d; } 
+.cell[data-value="4"] { background-color: #1f2e40; }
+.cell[data-value="8"] { background-color: #1d2935; }
+.cell[data-value="16"] { background-color: #192635; }
+.cell[data-value="32"] { background-color: #264531; }
+.cell[data-value="64"] { background-color: #2f553c; }
+.cell[data-value="128"] { background-color: #375e45; }
+.cell[data-value="256"] { background-color: #40684f; }
+.cell[data-value="512"] { background-color: #8c5a6c; }
+.cell[data-value="1024"] { background-color: #744557; }
+.cell[data-value="2048"] { background-color: #5c3443; }
+.cell[data-value="4096"] { background-color: #452231; }
+.cell[data-value="8192"] { background-color: #5a2c2c; }
+.cell[data-value="16384"] { background-color: #7a3a3a; }
+.cell[data-value="32768"] { background-color: #9b4848; }
+.cell[data-value="65536"] { background-color: #bc5656; }
 
 #score {
   margin-bottom: 20px;
