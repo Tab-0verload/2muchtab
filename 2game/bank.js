@@ -1,9 +1,8 @@
 import { getBalance, subtractBalance, addBalance } from '../clicker.js';
 import { formatNumber } from '../clicker.js';
 
-const duration = 30 * 60 *1000; // 2 минуты
+const duration = 20 * 60 *1000; // 2 минуты
 
-let bankMultiplier = Number(localStorage.getItem('bankMultiplier')) || 1;
 let depositLevel = Number(localStorage.getItem('depositLevel')) || 1;
 
 function saveTimers(timers) {
@@ -90,7 +89,7 @@ timers.push({
       const timePassed = Date.now() - t.start;
 
       if (timePassed >= duration && !t.claimed) {
-        const reward = Math.floor(t.amount * (1 + t.rate * bankMultiplier));
+        const reward = Math.floor(t.amount * (1 + t.rate));
         li.textContent = `Готово: вклад ${formatNumber(t.amount)} | прибыль ${formatNumber(reward)}`;
         const claimBtn = document.createElement('button');
         claimBtn.classList.add('mclickgcl');
