@@ -6,7 +6,7 @@ export function startGame(container) {
     <div id="game-field"></div>
     <button id="restart-btn">Заново</button><br />
   `;
-
+let bankMultiplier = Number(localStorage.getItem('bankMultiplier')) || 1;
   const fieldSize = 4;
   let gameField = Array(fieldSize * fieldSize).fill(null);
   let selectedCellIndex = null;
@@ -45,10 +45,10 @@ function updateScore() {
   const currentMax = Math.max(...gameField.filter(Boolean));
   if (currentMax > maxTile) {
     const delta = currentMax - maxTile;
-    localStorage.setItem('bl2048', (Number(localStorage.getItem('bl2048')) || 0) + delta);
+    localStorage.setItem('bl2048', (Number(localStorage.getItem('bl2048')) || 0) + delta *bankMultiplier);
     maxTile = currentMax;
   }
-  scoreElem.textContent = `Счёт: ${formatNumber(currentMax)}`;
+  scoreElem.textContent = `Счёт: ${formatNumber(currentMax *bankMultiplier)}`;
 }
 
   gameFieldElem.addEventListener("click", (e) => {
