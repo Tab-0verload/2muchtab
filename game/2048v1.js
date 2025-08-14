@@ -14,14 +14,14 @@ strategyBtn.textContent = 'Улучшить';
 strategyBtn.className = 'button';
 container.appendChild(strategyBtn);
 
-let currentPathLength = 1;
+let currentPathLength = 0;
 
 strategyBtn.addEventListener('click', () => {
     currentPathLength++;
 
-    if (currentPathLength >= 8) {
-        strategyBtn.textContent = 'Макс. уровень';
-        strategyBtn.disabled = true;
+    if (currentPathLength >= 9) {
+        strategyBtn.textContent = `Улучшено x0`;
+        currentPathLength-= 9;
     } else {
         strategyBtn.textContent = `Улучшено x${currentPathLength}`;
     }
@@ -69,11 +69,7 @@ strategyBtn.addEventListener('click', () => {
   }
 
   function selectTile(index) {
-    const highlighted = board.querySelector('.highlight');
-    if (highlighted) highlighted.classList.remove('highlight');
-
-    board.children[index].classList.add('highlight');
-
+    
     const neighbors = getNeighbors(index);
     const selectedValue = tiles[index];
     const match = neighbors.find(i => tiles[i] === selectedValue);
