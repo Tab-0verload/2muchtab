@@ -436,7 +436,7 @@ button#restart-btn {
 .₹ { color: orange; }
 
 /* Кнопка перезапуска */
-#resetBtn3 {
+#resetBtn3, #resetBtn3a{
   padding: 10px 20px;
   margin: 20px auto;
   font-size: 16px;
@@ -446,9 +446,6 @@ button#restart-btn {
   cursor: pointer;
   display: block;
   transition: background 0.2s;
-}
-#resetBtn3:hover {
-  background: darkgray;
 }
 
 /* Счёт */
