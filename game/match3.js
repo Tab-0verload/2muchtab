@@ -10,8 +10,22 @@ export function startGame(container) {
   container.innerHTML = `
     <div id="score3">Очки: 0</div>
     <div id="board3"></div>
+    <button id="resetBtn3a">Сменить пак</button>
     <button id="resetBtn3">Перезапустить поле</button>
   `;
+const emojiPacks = [
+      types, // твой начальный набор
+      ["\u{1F345}", "\u{1F336}", "\u{1F966}", "\u{1F33D}", "\u{1F952}", "\u{1F344}"], // овощи
+      ["\u{1F697}", "\u{1F695}", "\u{1F68C}", "\u{1F6F5}", "\u{1F6B2}", "\u{1F3CD}"],  // транспорт
+      ["\u{1F98A}", "\u{1F42F}", "\u{1F436}", "\u{1F431}", "\u{1F981}", "\u{1F99C}"], // животные
+      ["\u{26BD}", "\u{1F3C0}", "\u{1F3BE}", "\u{1F3D0}", "\u{1F3C8}", "\u{1F94A}"],  // спорт
+      ["\u{1F347}", "\u{1F34D}", "\u{1F34E}", "\u{1F34F}", "\u{1F965}", "\u{1F95D}"] // фрукты
+      ]
+      
+    let packIndex = 0;
+
+
+  
   let bankMultiplier = Number(localStorage.getItem('bankMultiplier')) || 1;
 
   const boardDiv = container.querySelector("#board3");
@@ -194,6 +208,14 @@ export function startGame(container) {
     drawBoard();
     runMatches();
   });
+
+  resetBtn3a.addEventListener("click", () => {
+  packIndex = (packIndex + 1) % emojiPacks.length;
+  types = emojiPacks[packIndex];
+  createBoard();
+  drawBoard();
+  runMatches();
+});
 
   createBoard();
   drawBoard();
