@@ -10,6 +10,12 @@ document.querySelectorAll('#category-nav button').forEach(button => {
       cat.style.display = cat.dataset.category === category ? 'block' : 'none';
     });
 
+    document.querySelectorAll('.category').forEach(cat => {
+      if (cat.dataset.category === category) {
+        cat.style.display = 'block';
+      }
+    });
+
     gameContent.innerHTML = '';
     statusBar.textContent = '';
   });
@@ -21,6 +27,10 @@ document.querySelectorAll('.launch-game').forEach(button => {
     const gameName = button.dataset.game;
     statusBar.textContent = `Загрузка: ${gameName}...`;
 
+document.querySelectorAll('.category').forEach(cat => {
+      cat.style.display = 'none';
+    });
+    
     try {
       const module = await import(`./${gameName}.js`);
       if (typeof module.startGame === 'function') {
