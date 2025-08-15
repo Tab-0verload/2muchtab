@@ -2,7 +2,7 @@ import { formatNumber } from '../clicker.js';
 
 export function startGame(container) {
   const size = 6;
-  const types = ["₿", "$", "€", "¥", "£", "₹"];
+  let types = ["₿", "$", "€", "¥", "£", "₹"];
   const board = [];
   let score = 0;
   let first = null;
