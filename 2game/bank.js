@@ -37,7 +37,7 @@ export function render(container) {
 
   depositOptions.forEach((dep) => {
     const btn = document.createElement('button');
-    btn.textContent = `Вложить ${formatNumber(dep.amount)}`;
+    btn.textContent = `Вложить ${formatNumber(dep.amount)} под ${dep.rate * 100}%`;
     btn.classList.add('mclickgs');
     btn.onclick = () => {
       if (!subtractBalance(dep.amount)) {
