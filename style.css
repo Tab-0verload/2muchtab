@@ -209,44 +209,48 @@ nav button:hover {
 
 /**/
 
-.fifteen-board {
-  display: grid;
-  grid-template-columns: repeat(4, 80px);
-  grid-gap: 5px;
+.board15 {
   justify-content: center;
-  margin-top: 20px;
-}
-
-.tile {
-  width: 80px;
-  height: 80px;
-  background: #4682B4;
-  color: white;
-  font-size: 32px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-}
-
-.tile.empty {
-  background: #444;
-  cursor: default;
-}
-
-.btn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #4682B4;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
+      display: grid;
+      grid-template-columns: repeat(6, 70px);
+      gap: 5px;
+    }
+    .tile15 {
+      width: 70px;
+      height: 70px;
+      background: #4682B4;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 4px;
+    }
+    .tile15.empty15 {
+      background: #444;
+      cursor: default;
+    }
+    .btn15 {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4682B4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .result15 {
+  height: 24px;             /* Резервируем высоту под сообщение */
+  margin-top: 15px;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  transition: opacity 0.3s ease;
+        }
 
 /**/
 
