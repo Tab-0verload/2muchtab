@@ -69,25 +69,56 @@ function updateScore() {
       container.querySelector(`[data-index="${from}"]`).classList.remove("selected");
 
       if (from !== to) {
-        if (toValue === null) {
-          gameField[to] = fromValue;
-          gameField[from] = null;
-          moveCount++;
-        } else if (fromValue === toValue) {
-          gameField[to] *= 2;
-          gameField[from] = null;
-          moveCount++;
-        }
-      }
+  let moved = false;
 
-      selectedCellIndex = null;
-      renderField();
-      updateScore();
+  if (toValue === null) {
+    gameField[to] = fromValue;
+    gameField[from] = null;
+    moved = true;
+  } else if (fromValue === toValue) {
+    gameField[to] *= 2;
+    gameField[from] = null;
+    moved = true;
+  }
 
-      if (moveCount % 2 === 0) {
-        spawnRandomBlock();
-        updateScore();
-      }
+  if (moved) {
+    renderField();
+    updateScore();
+
+    // проверяем двойки после каждого действия
+    ensureTwoTwos();
+    renderField(); // обновляем после добавления двоек
+    updateScore();
+  }
+}
+
+selectedCellIndex = null;
+
+// -----------------
+// исправленная проверка на количество двоек
+function ensureTwoTwos() {
+  let twos = gameField.filter(v => v === 2).length;
+
+  if (twos >= 2) return; // уже есть 2 или больше
+
+  // сколько нужно досоздать
+  let needToAdd = 2 - twos;
+
+  const emptyCells = gameField
+    .map((v, i) => (v === null ? i : null))
+    .filter(i => i !== null);
+
+  // если пустых клеток меньше чем нужно → ограничим
+  needToAdd = Math.min(needToAdd, emptyCells.length);
+
+  for (let i = 0; i < needToAdd; i++) {
+    const randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    gameField[randomIndex] = 2;
+
+    // убираем эту клетку из списка пустых, чтобы не попасть в неё снова
+    emptyCells.splice(emptyCells.indexOf(randomIndex), 1);
+  }
+                      }
     }
   });
 
