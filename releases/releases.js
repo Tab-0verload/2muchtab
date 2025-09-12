@@ -18,7 +18,7 @@ export function startGame(container) {
     },
     {
       title: 'Mortal II Kombat <br> October 24, 2025',
-      date: '2025-10-24T00:00:00',
+      date: '2026-05-15T00:00:00',
       class: 'mk2',
     },
     {
