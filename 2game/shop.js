@@ -40,7 +40,7 @@ export function render(container) {
   const bankCost = bankMultiplier * 1000;
   const bankBtn = document.createElement('button');
   bankBtn.classList.add('mclickgs');
-  bankBtn.innerHTML = `% банка <br> (x${formatNumber(bankMultiplier)} | ${formatNumber(bankCost)})`;
+  bankBtn.innerHTML = `Множитель<br>3 в ряд, 2048v2<br>(x${formatNumber(bankMultiplier)} | ${formatNumber(bankCost)})`;
   bankBtn.onclick = () => {
     if (subtractBalance(bankCost)) {
       bankMultiplier++;
