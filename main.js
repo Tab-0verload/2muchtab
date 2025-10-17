@@ -25,23 +25,27 @@ document.querySelectorAll('#category-nav button').forEach(button => {
 document.querySelectorAll('.launch-game').forEach(button => {
   button.addEventListener('click', async () => {
     const gameName = button.dataset.game;
-    statusBar.textContent = `Загрузка: ${gameName}...`;
+    const shortName = gameName.split('/').pop();
+    statusBar.textContent = `Загрузка: ${shortName}...`;
 
-document.querySelectorAll('.category').forEach(cat => {
+    
+    document.querySelectorAll('.category').forEach(cat => {
       cat.style.display = 'none';
     });
     
-    try {
-      const module = await import(`./${gameName}.js`);
-      if (typeof module.startGame === 'function') {
-        module.startGame(gameContent); // передаём DOM-элемент, не canvas
-        statusBar.textContent = `Модуль "${gameName}" загружен`;
-      } else {
-        statusBar.textContent = `Ошибка: функция startGame не найдена`;
-      }
-    } catch (e) {
-      console.error(e);
-      statusBar.textContent = `Ошибка при загрузке модуля "${gameName}"`;
-    }
+ 
+
+try {
+  const module = await import(`./${gameName}.js`);
+  if (typeof module.startGame === 'function') {
+    module.startGame(gameContent);
+    statusBar.textContent = `Модуль "${shortName}" загружен`; // только имя
+  } else {
+    statusBar.textContent = `Ошибка: функция startGame не найдена`;
+  }
+} catch (e) {
+  console.error(e);
+  statusBar.textContent = `Ошибка при загрузке модуля "${shortName}"`;
+}
   });
 });
