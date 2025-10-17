@@ -7,13 +7,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <nav id="category-nav">
-      <button data-category="math" class="active">Математика</button>
-      <button data-category="games">Игры</button>
-      <button data-category="releases">Скоро</button>
-    </nav>
-  </header>
+  <div id="status-bar"></div>
+  
 
   <main>
     <section id="categories">
@@ -34,6 +29,7 @@
           <button class="launch-game" data-game="game/2048v1">2048v1</button>
           <button class="launch-game" data-game="game/2048v2">2048v2</button>
           <button class="launch-game" data-game="game/match3">3 в ряд</button>
+          <button class="launch-game" data-game="game/cards">Карты</button>
           <button class="launch-game" data-game="clicker">Кликер</button>
         </div>
       </div>
@@ -50,9 +46,15 @@
       <div id="game-content"></div>
     </section>
 
-    <div id="status-bar"></div>
+    
   </main>
-
+<header>
+    <nav id="category-nav">
+      <button data-category="math" class="active">Математика</button>
+      <button data-category="games">Игры</button>
+      <button data-category="releases">Скоро</button>
+    </nav>
+</header>
   <script type="module" src="main.js"></script>
 </body>
 </html>
