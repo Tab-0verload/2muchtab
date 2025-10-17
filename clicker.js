@@ -44,7 +44,7 @@ const views = {
 
 export function startGame(container) {
   container.innerHTML = `
-   <header class="hlickg">
+   <div class="hlickg">
     <div class="dclickg" id="balance">Баланс: 0</div>
     <nav class="nclickg">
       <button data-view="game1">Кликер</button>
@@ -53,7 +53,7 @@ export function startGame(container) {
       <button data-view="bank">Банк</button>
     </nav>
     <main class="mclickg" id="app"></main>
-  </header>
+  </div>
   
   `;
   function updateBalance() {
