@@ -12,11 +12,6 @@ export function startGame(container) {
       class: 'gta6',
     },
     {
-      title: 'Tron: Ares <br> October 10, 2025',
-      date: '2025-10-10T00:00:00',
-      class: 'tron',
-    },
-    {
       title: 'Mortal II Kombat <br> May 15, 2026',
       date: '2026-05-15T00:00:00',
       class: 'mk2',
