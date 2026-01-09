@@ -128,8 +128,8 @@ const emojiPacks = [
     const matches = checkMatches();
     if (matches.length === 0) return;
     matches.forEach(([x, y]) => (board[y][x] = null));
-    score += matches.length *bankMultiplier;
-    localStorage.setItem('blm3', (Number(localStorage.getItem('blm3')) || 0) + matches.length *bankMultiplier);
+    score += matches.length*35 *bankMultiplier;
+    localStorage.setItem('blm3', (Number(localStorage.getItem('blm3')) || 0) + matches.length*35 *bankMultiplier);
     scoreDiv.textContent = `Очки: ${formatNumber(score)}`;
     collapseBoard();
     setTimeout(() => {
