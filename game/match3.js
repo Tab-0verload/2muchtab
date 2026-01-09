@@ -10,8 +10,8 @@ export function startGame(container) {
   container.innerHTML = `
     <div id="score3">Очки: 0</div>
     <div id="board3"></div>
+    <button id="resetBtn3">Пересобрать</button>
     <button id="resetBtn3a">Сменить пак</button>
-    <button id="resetBtn3">Перезапустить поле</button>
   `;
 const emojiPacks = [
       types, // твой начальный набор
@@ -20,6 +20,7 @@ const emojiPacks = [
       ["\u{1F98A}", "\u{1F42F}", "\u{1F436}", "\u{1F431}", "\u{1F981}", "\u{1F99C}"], // животные
       ["\u{26BD}", "\u{1F3C0}", "\u{1F3BE}", "\u{1F3D0}", "\u{1F3C8}", "\u{1F94A}"],  // спорт
       ["\u{1F347}", "\u{1F34D}", "\u{1F34E}", "\u{1F34F}", "\u{1F965}", "\u{1F95D}"] // фрукты
+      ["\u{1F341}", "\u{1F340}", "\u{1F338}", "\u{1F3F5}", "\u{1F339}", "\u{1F337}"] // цветы
       ]
       
     let packIndex = 0;
