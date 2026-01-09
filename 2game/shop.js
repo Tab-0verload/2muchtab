@@ -20,7 +20,7 @@ export function render(container) {
   const info = document.createElement('div');
 
   // Клик улучшение
-  const clickCost = clickLevel * 100000;
+  const clickCost = clickLevel * 100000 * 1.5;
   const clickBtn = document.createElement('button');
   clickBtn.classList.add('mclickgs');
   clickBtn.innerHTML = `Клик <br> (x${formatNumber(clickLevel)} | ${formatNumber(clickCost)})`;
@@ -35,10 +35,10 @@ export function render(container) {
   };
 
   // Множитель банка
-  const bankCost = bankMultiplier * 1000;
+  const bankCost = bankMultiplier * 2000 * 1.024;
   const bankBtn = document.createElement('button');
   bankBtn.classList.add('mclickgs');
-  bankBtn.innerHTML = `Множитель<br>3 в ряд, 2048v2<br>(x${formatNumber(bankMultiplier)} | ${formatNumber(bankCost)})`;
+  bankBtn.innerHTML = `Множитель<br>(x${formatNumber(bankMultiplier)} | ${formatNumber(bankCost)})`;
   bankBtn.onclick = () => {
     if (subtractBalance(bankCost)) {
       bankMultiplier++;
