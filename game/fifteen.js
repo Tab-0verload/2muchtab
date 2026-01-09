@@ -5,6 +5,8 @@ export function startGame(container) {
     <div class="result15" id="game-message"></div>
   `;
 
+let bankMultiplier = Number(localStorage.getItem('bankMultiplier')) || 1;
+
   const board = document.getElementById('board15');
 const newGameBtn = document.getElementById('new-game-btn');
 const gameMessage = document.getElementById('game-message');
@@ -60,7 +62,7 @@ function move(index) {
     if (isSolved() && gameStarted) {
   gameMessage.textContent = "Поздравляем, вы победили!";
   gameStarted = false; // блокируем повторную победу
-  localStorage.setItem('bl15', (Number(localStorage.getItem('bl15')) || 0) + 100000);
+  localStorage.setItem('bl15', (Number(localStorage.getItem('bl15')) || 0) + 2048* bankMultiplier);
 }
   }
 }
