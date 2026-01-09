@@ -7,6 +7,7 @@ export function startGame(container) {
     <button id="restart-btn">Заново</button><br />
   `;
 let bankMultiplier = Number(localStorage.getItem('bankMultiplier')) || 1;
+
   const fieldSize = 4;
   let gameField = Array(fieldSize * fieldSize).fill(null);
   let selectedCellIndex = null;
