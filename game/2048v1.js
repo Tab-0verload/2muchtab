@@ -9,6 +9,8 @@ export function startGame(container) {
     <button class="button" id="new-game-btn">Новая игра</button>
   `;
 
+let bankMultiplier = Number(localStorage.getItem('bankMultiplier')) || 1;
+
 const strategyBtn = document.createElement('button');
 strategyBtn.textContent = 'Улучшить';
 strategyBtn.className = 'button';
@@ -75,15 +77,18 @@ strategyBtn.addEventListener('click', () => {
     const match = neighbors.find(i => tiles[i] === selectedValue);
 
     if (match !== undefined) {
-      const mergedValue = tiles[match];
-      tiles[match] *= 2;
-      tiles[index] = 2;
-      score += mergedValue;
-      const delta = score - (window.prevScore || 0);
-if (delta > 0) {
-  localStorage.setItem('bl15', (Number(localStorage.getItem('bl15')) || 0) + delta);
-}
-window.prevScore = score;
+  tiles[match] *= 2;
+  tiles[index] = 2;
+
+  const highestTile = Math.max(...tiles);
+  score = highestTile * bankMultiplier;
+
+  const delta = score - (window.prevScore || 0);
+  if (delta > 0) {
+    localStorage.setItem('bl15', (Number(localStorage.getItem('bl15')) || 0) + delta);
+  }
+
+  window.prevScore = score;
       render();
       updateMoveInfo();
       updateScoreInfo();
