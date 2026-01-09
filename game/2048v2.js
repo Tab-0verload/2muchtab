@@ -131,7 +131,7 @@ function ensureTwoTwos() {
     gameField.fill(null);
     moveCount = 0;
     selectedCellIndex = null;
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2; i++) {
       spawnRandomBlock();
     }
     renderField();
