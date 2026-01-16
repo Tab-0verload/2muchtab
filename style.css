@@ -230,7 +230,7 @@ nav button:hover {
 .board15 {
   justify-content: center;
   display: grid;
-  grid-template-columns: repeat(6, minmax(50px, 70px));
+  grid-template-columns: repeat(4, minmax(50px, 90px));
   gap: 5px;
 }
 
