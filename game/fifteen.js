@@ -16,7 +16,7 @@ const size = 6;
 
 // Создаём решённое поле
 function createSolvedTiles() {
-  return [...Array(35).keys()].map(n => n + 1).concat(0);
+  return [...Array(15).keys()].map(n => n + 1).concat(0);
 }
 
 // Перемешиваем поле честными ходами
@@ -69,10 +69,10 @@ function move(index) {
 
 // Проверка на победу
 function isSolved() {
-  for (let i = 0; i < 35; i++) {
+  for (let i = 0; i < 15; i++) {
     if (tiles[i] !== i + 1) return false;
   }
-  return tiles[35] === 0;
+  return tiles[15] === 0;
 }
 
 // Инициализация
