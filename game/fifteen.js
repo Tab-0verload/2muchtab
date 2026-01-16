@@ -12,7 +12,7 @@ const newGameBtn = document.getElementById('new-game-btn');
 const gameMessage = document.getElementById('game-message');
 let gameStarted = false;
 let tiles = [];
-const size = 6;
+const size = 4;
 
 // Создаём решённое поле
 function createSolvedTiles() {
