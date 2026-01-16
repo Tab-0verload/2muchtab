@@ -1,14 +1,14 @@
-import {formatNumber} from '../clicker.js';
+import { formatNumber } from '../clicker.js';
 
 export function startGame(container) {
   container.innerHTML = `
     <div class="mg-wrapper">
+      <div>Очки: <span id="mg-score">0</span></div>
       <div class="mg-grid" id="mg-grid"></div>
       <div class="mg-buttons">
         <button id="mg-newGame">Новая игра</button>
         <button id="mg-changeTheme">Сменить тему</button>
       </div>
-      <div>Очки: <span id="mg-score">0</span></div>
       <div id="mg-message"></div>
     </div>
   `;
@@ -16,12 +16,12 @@ export function startGame(container) {
   initFirstView();
 }
 
-// ===== Темы смайлов =====
+let bankMultiplier = Number(localStorage.getItem('bankMultiplier')) || 1;
+
 const themes = [
   [ "\u{1F436}", "\u{1F431}", "\u{1F42D}", "\u{1F42F}", "\u{1F43B}", "\u{1F418}", "\u{1F43A}", "\u{1F989}" ],
   [ "\u{1F34E}", "\u{1F353}", "\u{1F352}", "\u{1F34A}", "\u{1F347}", "\u{1F349}", "\u{1F34D}", "\u{1F96D}" ],
-  [ "\u{2600}", "\u{2601}", "\u{2744}", "\u{1F327}", "\u{1F30A}", 
-    "\u{1F32C}", "\u{1F525}", "\u{1F4A7}" ]
+  [ "\u{2600}", "\u{2601}", "\u{2744}", "\u{1F327}", "\u{1F30A}", "\u{1F32C}", "\u{1F525}", "\u{1F4A7}" ]
 ];
 
 let currentThemeIndex = 0;
@@ -30,15 +30,18 @@ let firstCard = null;
 let lockBoard = false;
 let score = 0;
 
-// Функция для добавления очков в localStorage
 function addScoreToLocalStorage(newPoints) {
-  const key = "bl15"; // ключ, который ты используешь для всех игр
-  let current = parseInt(localStorage.getItem(key)) || 0; // берём текущие очки или 0
-  current += newPoints; // прибавляем новые очки
-  localStorage.setItem(key, current); // записываем обратно
+  const key = "bl15";
+  let current = parseInt(localStorage.getItem(key)) || 0;
+  current += newPoints;
+  localStorage.setItem(key, current);
 }
 
-// ===== Логика =====
+function setThemeButtonEnabled(enabled) {
+  const btn = document.querySelector("#mg-changeTheme");
+  if (btn) btn.disabled = !enabled;
+}
+
 function createCards(shuffle = false, faceUp = false) {
   const theme = themes[currentThemeIndex];
   const doubled = [...theme, ...theme];
@@ -61,6 +64,7 @@ function createCards(shuffle = false, faceUp = false) {
 function renderCards() {
   const grid = document.querySelector("#mg-grid");
   grid.innerHTML = "";
+
   cards.forEach(card => {
     const div = document.createElement("div");
     div.className = `mg-card ${card.flipped ? "mg-flipped" : ""} ${card.matched ? "mg-matched" : ""}`;
@@ -72,27 +76,37 @@ function renderCards() {
 
 function flipCard(card) {
   if (lockBoard || card.flipped || card.matched) return;
+
   card.flipped = true;
   renderCards();
 
   if (!firstCard) {
     firstCard = card;
-  } else {
-    lockBoard = true;
-    if (firstCard.emoji === card.emoji) {
-      firstCard.matched = true;
-      card.matched = true;
-      score += 1000;
-      addScoreToLocalStorage(1000);
-      document.querySelector("#mg-score").textContent = formatNumber(score);
-      resetTurn();
-    } else {
-      setTimeout(() => {
-        firstCard.flipped = false;
-        card.flipped = false;
-        resetTurn();
-      }, 800);
+    return;
+  }
+
+  lockBoard = true;
+
+  if (firstCard.emoji === card.emoji) {
+    firstCard.matched = true;
+    card.matched = true;
+
+    score += 256 * bankMultiplier;
+    addScoreToLocalStorage(256 * bankMultiplier);
+    document.querySelector("#mg-score").textContent = formatNumber(score);
+
+    resetTurn();
+
+    if (cards.every(c => c.matched)) {
+      document.querySelector("#mg-message").textContent = "Победа";
+      setThemeButtonEnabled(true);
     }
+  } else {
+    setTimeout(() => {
+      firstCard.flipped = false;
+      card.flipped = false;
+      resetTurn();
+    }, 800);
   }
 }
 
@@ -102,36 +116,47 @@ function resetTurn() {
   renderCards();
 }
 
-// ===== Стартовые режимы =====
 function initFirstView() {
   score = 0;
   document.querySelector("#mg-score").textContent = score;
   document.querySelector("#mg-message").textContent = "";
-  createCards(false, true); // без перемешивания, лицом вверх
+
+  createCards(false, true);
   renderCards();
+
+  setThemeButtonEnabled(true);
 }
 
 function initNewGame() {
   score = 0;
   document.querySelector("#mg-score").textContent = score;
   document.querySelector("#mg-message").textContent = "";
-  createCards(true, false); // перемешать, рубашками
+
+  createCards(true, false);
   renderCards();
+
+  setThemeButtonEnabled(false);
 }
 
 function changeTheme() {
-  const oldOrder = cards.map(c => c.id); // сохраняем порядок
+  const btn = document.querySelector("#mg-changeTheme");
+  if (btn.disabled) return;
+
   currentThemeIndex = (currentThemeIndex + 1) % themes.length;
   const theme = themes[currentThemeIndex];
-  cards.forEach((c, i) => c.emoji = theme[Math.floor(i % (theme.length))]);
+
+  cards.forEach((c, i) => {
+    c.emoji = theme[i % theme.length];
+  });
+
   renderCards();
 }
 
-// ===== События =====
 document.addEventListener("click", (e) => {
   if (e.target.id === "mg-newGame") {
     initNewGame();
   }
+
   if (e.target.id === "mg-changeTheme") {
     changeTheme();
   }
