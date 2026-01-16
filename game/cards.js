@@ -7,6 +7,7 @@ export function startGame(container) {
       <button class="table-btn" onclick="selectTable(2500)">Стол 1 — ставка 2,500</button>
       <button class="table-btn" onclick="selectTable(25000)">Стол 2 — ставка 25,000</button>
       <button class="table-btn" onclick="selectTable(250000)">Стол 3 — ставка 250,000</button>
+<button class="table-btn" onclick="selectTable(2500000)">Стол 4 — ставка 2,500,000</button>
     </div>
   </div>
 
