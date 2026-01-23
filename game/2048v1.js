@@ -141,7 +141,9 @@ function autoPlay() {
     if (moved) break;
   }
 
-  setTimeout(autoPlay, 0);
+  if (board.isConnected) {
+  setTimeout(autoPlay, 256);
+}
 }
 
 
