@@ -137,6 +137,12 @@ export function startGame(container) {
   ];
 
   autoPlayInterval = setInterval(() => {
+
+if (!container.querySelector('#game-field')) {
+  stopAutoPlay();
+  return;
+}
+
     let moved = false;
     let mergedThisTurn = new Array(gameField.length).fill(false);
 
@@ -180,7 +186,7 @@ export function startGame(container) {
       return;
     }
 
-  }, 496);
+  }, 512);
 }
 
 
