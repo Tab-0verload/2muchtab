@@ -1,5 +1,5 @@
 import * as game1 from './2game/game1.js';
-import * as game2 from './2game/game2.js';
+
 import * as shop from './2game/shop.js';
 import * as bank from './2game/bank.js';
 
@@ -37,7 +37,7 @@ export function formatNumber(num) {
 
 const views = {
   game1,
-  game2,
+  
   shop,
   bank,
 };
@@ -48,7 +48,7 @@ export function startGame(container) {
     <div class="dclickg" id="balance">Баланс: 0</div>
     <nav class="nclickg">
       <button data-view="game1">Кликер</button>
-      <button data-view="game2">Лотерея</button>
+
       <button data-view="shop">Магазин</button>
       <button data-view="bank">Банк</button>
     </nav>
