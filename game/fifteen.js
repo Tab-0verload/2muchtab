@@ -62,7 +62,7 @@ function move(index) {
     if (isSolved() && gameStarted) {
   gameMessage.textContent = "Поздравляем, вы победили!";
   gameStarted = false; // блокируем повторную победу
-  localStorage.setItem('bl15', (Number(localStorage.getItem('bl15')) || 0) + 2048* bankMultiplier);
+  localStorage.setItem('bl15', (Number(localStorage.getItem('bl15')) || 0) + 1024* bankMultiplier);
 }
   }
 }
