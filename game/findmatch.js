@@ -91,8 +91,8 @@ function flipCard(card) {
     firstCard.matched = true;
     card.matched = true;
 
-    score += 256 * bankMultiplier;
-    addScoreToLocalStorage(256 * bankMultiplier);
+    score += 128 * bankMultiplier;
+    addScoreToLocalStorage(128 * bankMultiplier);
     document.querySelector("#mg-score").textContent = formatNumber(score);
 
     resetTurn();
