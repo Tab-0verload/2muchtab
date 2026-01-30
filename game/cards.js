@@ -4,10 +4,10 @@ export function startGame(container) {
   <div id="tableSelect" style="flex:1;display:flex;flex-direction:column;justify-content:center;">
     <h1 style="text-align:center;margin-bottom:16px;">Выберите стол</h1>
     <div class="tablespk">
-      <button class="table-btn" onclick="selectTable(2500)">Стол 1 — ставка 2,500</button>
-      <button class="table-btn" onclick="selectTable(25000)">Стол 2 — ставка 25,000</button>
-      <button class="table-btn" onclick="selectTable(250000)">Стол 3 — ставка 250,000</button>
-<button class="table-btn" onclick="selectTable(2500000)">Стол 4 — ставка 2,500,000</button>
+      <button class="table-btn" onclick="selectTable(2048)">Стол 1 — ставка 2,048</button>
+      <button class="table-btn" onclick="selectTable(16384)">Стол 2 — ставка 16,384</button>
+      <button class="table-btn" onclick="selectTable(262144)">Стол 3 — ставка 262,144</button>
+<button class="table-btn" onclick="selectTable(2097152)">Стол 4 — ставка 2,097,152</button>
     </div>
   </div>
 
@@ -41,7 +41,7 @@ export function startGame(container) {
       <button class="btn-pass" id="passBtn">Пас</button>
       <button class="btn-check" id="checkBtn">Чек</button>
       <button class="btn-raise2" id="raise2Btn">Рейз ×2</button>
-      <button class="btn-raise3" id="raise3Btn">Рейз ×3</button>
+      <button class="btn-raise3" id="raise3Btn">Рейз ×4</button>
     </div>
     
     <div class="messagepk" id="message">Нажмите любую кнопку, чтобы начать раздачу</div>
@@ -59,6 +59,7 @@ let stage = 0;
 let balance = Number(localStorage.getItem('blpk')) || 0;
 let defaultBet = 0;
 let bet = 0;
+let lastBet = 0;
 const balanceLimit = -100000000;
 
 const balanceEl = document.getElementById("balance");
@@ -78,21 +79,42 @@ function selectTable(startBet) {
   document.getElementById("tableSelect").style.display = "none";
   document.getElementById("game").style.display = "flex";
   newHand();
+
+if (balance <= balanceLimit) {
+  checkBtn.disabled = true;
+  raise2Btn.disabled = true;
+  raise3Btn.disabled = true;
+  passBtn.disabled = true;
+  messageEl.textContent = "Баланс слишком низкий";
+}
 }
 window.selectTable = selectTable;
 
 function updateUI() {
-  if (balance < balanceLimit) balance = balanceLimit;
+balanceEl.textContent = Math.max(balance, balanceLimit).toLocaleString();
   
   balanceEl.textContent = balance.toLocaleString();
   betEl.textContent = bet.toLocaleString();
 
+  // Всегда пас доступен
+  //passBtn.disabled = false;
 
-  if (balance <= balanceLimit) {
-    enableButtons(false);
-    messageEl.textContent = "Баланс достиг минимального значения. Ставки недоступны!";
-  } else if (stage < 3) {
-    enableButtons(true);
+  // Рассчитываем разницу для потенциального рейза
+  const diff2 = (bet*2) - lastBet;  // если нажать х2
+  const diff4 = (bet*4) - lastBet;  // если нажать х4
+  const diffCheck = defaultBet - lastBet; // если нажать чек
+
+  // Блокируем кнопки если потенциальное списание превысит лимит
+  raise2Btn.disabled = (balance - diff2 < balanceLimit);
+  raise3Btn.disabled = (balance - diff4 < balanceLimit);
+  checkBtn.disabled = (balance - diffCheck < balanceLimit);
+  passBtn.disabled = (balance - diffCheck < balanceLimit);
+
+  // Стадия меньше 3 и хотя бы одна кнопка доступна
+  if (stage >= 3) {
+    raise2Btn.disabled = true;
+    raise3Btn.disabled = true;
+    checkBtn.disabled = true;
   }
 }
 
@@ -149,6 +171,7 @@ function newHand() {
   renderPlayer();
   renderBoard();
   bet = defaultBet;
+lastBet = 0;
   updateUI();
   enableButtons(true);
   messageEl.textContent = "Раздача началась!";
@@ -159,9 +182,11 @@ function nextStage(action) {
     newHand(); return;
   }
   if (action==="Рейз ×2") { bet *= 2; }
-  if (action==="Рейз ×3") { bet *= 3; }
-  balance -= bet;
-  localStorage.setItem('blpk', (Number(localStorage.getItem('blpk')) || 0) - bet);
+  if (action==="Рейз ×4") { bet *= 4; }
+  const diff = bet - lastBet;
+balance -= diff;
+localStorage.setItem('blpk', (Number(localStorage.getItem('blpk')) || 0) - diff);
+lastBet = bet;
   
   updateUI();
   if (stage===0) { board[0]=deck.pop(); board[1]=deck.pop(); board[2]=deck.pop(); stage=1; messageEl.textContent="Флоп"; }
@@ -183,6 +208,7 @@ function evaluate() {
   }
   updateUI();
   bet = defaultBet;
+lastBet = 0;
   enableButtons(false);
 }
 
@@ -230,7 +256,7 @@ function evaluateHand(cards) {
     const suitedSet = new Set(suitedCards);
 
     const royal = [10, 11, 12, 13, 14].every(v => suitedSet.has(v));
-    if (royal) return { name: "Royal Flush", multiplier: 60 };
+    if (royal) return { name: "Royal Flush", multiplier: 32 };
 
     let suitedStraight = false;
     for (let i = 0; i < suitedCards.length - 4; i++) {
@@ -244,22 +270,22 @@ function evaluateHand(cards) {
         break;
       }
     }
-    if (suitedStraight) return { name: "Straight Flush", multiplier: 20 };
+    if (suitedStraight) return { name: "Straight Flush", multiplier: 16 };
   }
 
-  if (groups[0] === 4) return { name: "Four of a Kind", multiplier: 9 };
-  if (groups[0] === 3 && groups[1] === 2) return { name: "Full House", multiplier: 6 };
-  if (flush) return { name: "Flush", multiplier: 4 };
-  if (straight) return { name: "Straight", multiplier: 2 };
-  if (groups[0] === 3) return { name: "Three of a Kind", multiplier: 0.9 };
-  if (groups[0] === 2 && groups[1] === 2) return { name: "Two Pair", multiplier: 0.6 };
-  if (groups[0] === 2) return { name: "One Pair", multiplier: 0.3 };
+  if (groups[0] === 4) return { name: "Four of a Kind", multiplier: 8 };
+  if (groups[0] === 3 && groups[1] === 2) return { name: "Full House", multiplier: 4 };
+  if (flush) return { name: "Flush", multiplier: 2 };
+  if (straight) return { name: "Straight", multiplier: 1 };
+  if (groups[0] === 3) return { name: "Three of a Kind", multiplier: 0.5 };
+  if (groups[0] === 2 && groups[1] === 2) return { name: "Two Pair", multiplier: 0.25 };
+  if (groups[0] === 2) return { name: "One Pair", multiplier: 0.125 };
   return { name: "No Win", multiplier: 0 };
 }
 
 passBtn.onclick=()=>nextStage("Пас");
 checkBtn.onclick=()=>nextStage("Чек");
 raise2Btn.onclick=()=>nextStage("Рейз ×2");
-raise3Btn.onclick=()=>nextStage("Рейз ×3");
+raise3Btn.onclick=()=>nextStage("Рейз ×4");
 
 }
